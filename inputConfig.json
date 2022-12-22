@@ -15,6 +15,37 @@
     "addSuffix" : true,
     "numberOfInstance": 1,
     "delayValueMilliSecond": 45000,
+    " // can add or remove more portInfos " : "Add or remove as deem necessary",
+    "portInfos" :  [
+        {
+            "cidrs" : ["cidrsValues"],
+            "fromPort" : 80,
+            "ipv6Cidrs" : ["ipv6CidrsValues"],
+            "protocol"  : "tcp",
+            "toPort" : 80
+        },
+        {
+            "cidrs" : ["cidrsValues"],
+            "fromPort" : 443,
+            "ipv6Cidrs" : ["ipv6CidrsValues"],
+            "protocol"  : "tcp",
+            "toPort" : 443
+        },
+        {
+            "cidrs" : ["cidrsValues"],
+            "fromPort" : 22,
+            "ipv6Cidrs" : ["ipv6CidrsValues"],
+            "protocol"  : "tcp",
+            "toPort" : 22
+        },
+        {
+            "cidrs" : ["cidrsValues"],
+            "fromPort" : 6379,
+            "ipv6Cidrs" : ["ipv6CidrsValues"],
+            "protocol"  : "tcp",
+            "toPort" : 6379
+        }
+    ],
     " // other bundleId" : ["nano_2_0", "micro_2_0", "small_2_0", "medium_2_0", "large_2_0", "xlarge_2_0", "4xlarge_2_0"],
     " // other avaibilityZone" : ["us-east-1{a,b,c,d,e,f}", "us-east-2{a,b,c}", "us-west-2{a,b,c}", "ca-central-1{a,b}", "etc."],
     "createParameters" : {
