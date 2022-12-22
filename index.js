@@ -126,12 +126,7 @@ class UNEPOStack
                         });
                         
                     }, delayValueMilliSecond);
-
-
-                    
-
                 });
-                
             });
         }
         else if(paramsObject.deleteResources === true)
