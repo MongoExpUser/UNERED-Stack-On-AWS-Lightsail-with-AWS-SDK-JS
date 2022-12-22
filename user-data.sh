@@ -16,7 +16,7 @@
 #  1) Installs additional Ubuntu packages                                                                              #
 #  2) Installs and configures Node.js v19.x and Express v5.0.0-alpha.8 web server framework                            #
 #     Installs other node.js packages                                                                                  #
-#  3) Installs postgresql server                                                                                       #
+#  3) Installs redis-stack server                                                                                      #
 #                                                                                                                      #
 #======================================================================================================================#
 
