@@ -8,7 +8,7 @@
     "credentials" : "credentials.json",
     "userData" : "user-data.sh",
     "nodejsVersion" : "19.0.x",
-    "redisVersion" : "6.2.x",
+    "redisStackVersion" : "6.2.x",
     "staticIpName" : "staticIpName",
     "createResources" : true,
     "deleteResources" : false,
