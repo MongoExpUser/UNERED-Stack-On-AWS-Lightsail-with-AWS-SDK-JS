@@ -66,6 +66,8 @@ class UNEPOStack
         const deleteInstanceParameters = paramsObject.deleteInstanceParameters;
         const deleteStaticIpParameters = paramsObject.deleteStaticIpParameters;
         const delayValueMilliSecond = paramsObject.delayValueMilliSecond;
+        const portInfos = paramsObject.portInfos;
+        const portInfosLength = portInfos.length;
         const line = UNEPOStack.separator();
         let createInstancesData;
    
@@ -95,7 +97,7 @@ class UNEPOStack
                       staticIpName: paramsObject.staticIpName
                     };
                     
-                    // delay to allow lightsail instance to be fully created, and then attach static ip to the lightsail instance
+                    // delay to allow instance to be fully created, before attaching static ip to the instance and setting firewall rules
                     console.log(`Delay for ${delayValueMilliSecond/1000} seconds before attaching static ip to Lightsail instance.`);
                   
                     setTimeout(function()
@@ -104,10 +106,30 @@ class UNEPOStack
                         {
                             const message = "Successfully attached static ip to AWS Lightsail instance.";
                             ups.confirmationMessage(attachStaticIpError,  attachStaticIpData, message, line);
+
+
+                            // 4. open public ports i.e. set firewall rules for the instance
+                            for(let index = 0; index < portInfosLength; index++)
+                            {
+                                const openInstancePublicPortsParams = {
+                                    instanceName: createInstancesData.operations[0].resourceName,
+                                    portInfo: portInfos[index]
+                                };
+
+                                lightsailClient.openInstancePublicPorts(openInstancePublicPortsParams, function(openInstancePublicPortsError, openInstancePublicPortsData) 
+                                {
+                                    const message = `Successfully open ports ${portInfos[index].fromPort} on AWS Lightsail instance.`;
+                                    ups.confirmationMessage(openInstancePublicPortsError, openInstancePublicPortsData, message, line);
+                                });
+                            }
+
                         });
                         
                     }, delayValueMilliSecond);
+
+
                     
+
                 });
                 
             });
@@ -144,12 +166,14 @@ class UNEPOStack
 
 (function main()
 {
+
     // require/import and instantiate relevant modules
     const fs = require('fs');
     const ups = new UNEPOStack();
-    const inputConfigJsonFilePath = "inputConfigEcoLightsail.json";
+    const inputConfigJsonFilePath = "inputConfig.json";
     let inputConfig = JSON.parse(fs.readFileSync(inputConfigJsonFilePath));
     const numberOfInstance = inputConfig.numberOfInstance;
+
 
     for(let indexValue = 0; indexValue < numberOfInstance; indexValue++)
     {
@@ -201,7 +225,8 @@ class UNEPOStack
             deleteStaticIpParameters : inputConfig.deleteStaticIpParameters,
             createResources : inputConfig.createResources,
             deleteResources : inputConfig.deleteResources,
-            delayValueMilliSecond : inputConfig.delayValueMilliSecond
+            delayValueMilliSecond : inputConfig.delayValueMilliSecond,
+            portInfos : inputConfig.portInfos
         }
         
         try
