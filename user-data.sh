@@ -289,69 +289,62 @@ install_and_configure_nodejs_web_server () {
 }
 
     
-install_postgresql_server () {
+install_redis_stack_server () {
 
       if [ $enable_postgresql_server = true ]
       then
-        # install postgresql latest version
-        # 1. create the file repository configuration:
-        sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-        
-        # 2. import the repository signing key:
-        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-        
+       # install redis-stack-server latest version
+        # 1. import the repository signing key:
+        curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+        # 2. create the file repository configuration:
+        echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
         # 3. update the package lists:
         sudo apt-get -y update
-
         # 4.  finally, install
-        sudo apt-get -y install postgresql
+        sudo apt-get -y install redis-stack-server
         echo -e "Y"
         echo -e "Y"
-
+        
         # 5. clean
         clean_system
+
+        # by default, redis-server auto starts after installation
         
-        # by default, postgresql auto starts after installation
+        # To START or Re-START or STOP Redis-stack Server or Check Status of Redis-stack Server, use these commands:
+        # sudo systemctl start redis-stack-server
+        # sudo systemctl restart redis-stack-server
+        # sudo systemctl stop redis-stack-server
+        # sudo systemctl status redis-stack-server
         
-        # To START or Re-START or STOP PostgreSQL or Check Status of PostgreSQL, use these commands:
-        # sudo systemctl start postgresql
-        # sudo systemctl restart postgresql
-        # sudo systemctl stop postgresql
-        # sudo systemctl status postgresql
+        # To list current active redis units, use this command
+        # sudo systemctl list-units | grep redis
         
-        # To list current active postgresql units, use this command
-        # sudo systemctl list-units | grep postgresql
+        # to connect to Redis-stack server via the command line/cli/shell use this command:
+        # sudo redis-cli
         
-        # FOR PRODUCTION deployment, ensures:
-        # a) role(s)/user(s) with relevant level of permissions are created
-        #    see documentation: https://www.postgresql.org/docs/current/user-manag.html
-        # b) other security settings are enabled in the configuration file (/etc/postgresql/version/main/postgresql.conf) - version could be 9.6, 12.6, 14, etc.
-        #   important settings with in  'postgresql.conf' include:
-        #   ======================================================
-        #   listen_addresses = 'localhost'                         # default is 'localhost' but can set to the desired value  as indicatated below.  
-        #   listen_addresses = '0.0.0.0'                           # all IPv4 addresses
-        #   listen_addresses = '::'                                # all IPv6 addresses
-        #   listen_addresses = '*'                                 # all ip (IP4 and IPv6) addresses
-        #   host  all           all   0.0.0.0/0    scram-sha-256   # Allow access to all databases for all users with an encrypted password, from all ip4 endpoints
-        #   host  replication   all   0.0.0.0/0    scram-sha-256   # Allow replication connections for all users with an encrypted password, from all ip4 endpoint
-        #   max_connections = 100                                  # default is 100 but can set to the desired value  
-        #   work_mem = 25M                                         # default is 25M but set to = 0.25 x RAM  / max_connections
-        #   shared_buffers = 128MB                                 # default is 128MB but set to = 15% to 25% x RAM
-        #   maintenance_work_mem = 64MB                            # default is 64MB but set to = 0.05 x RAM and ensure greater than (>) work_mem
-        #   autovacuum = on                                        # default 
-        #   ======================================================
-        #   Note: change 'localhost', '0.0.0.0/0', '::', and '*'  to the desired endpoint(s) -> (ip4 or 1p6)
-        #   see documentation: https://www.postgresql.org/docs/current/runtime-config.html
+        # FOR PRODUCTION deployment, edit configuration file, to ensure high security, high avalaibility, access control, etc. by:
+        #  a) creating role(s)/user(s) with relevant level of permissions
+        #  b) deploying server with tls/ssl (in-transit), and at-rest (disk/data) encryption
+        #  c) using redis management document as guide:
+        #     see link to redis documentation on admin, security, config, HA, replication, scaling, persistence, etc: https://redis.io/docs/management/
+        #     path to configuration file on Ubuntu OS: sudo nano /etc/redis/redis.conf
+        
+        # ===========================
+        # Recommended Node.js Client
+        # ===========================
+        # Node-redis
+        # Documentation Link: https://github.com/redis/node-redis
+        # Installation: sudo npm install redis
+        
       fi
 }
-
 
 
 main () {
       # execute all functions sequentially
       create_dir_and_install_missing_packages
       install_and_configure_nodejs_web_server
-      install_postgresql_server
+      install_redis_stack_server
 }
 
 
