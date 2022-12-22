@@ -28,16 +28,23 @@ class UNEPOStack
       return null;
     }
     
+    prettyPrint(value)
+    {
+        console.log(JSON.stringify(value, null, 4));
+    }
+    
     confirmationMessage(error, data, message, line)
     {
         if(error)
         {
             return console.log(error);
         }
-                             
-        console.log(data);
+            
+        const ups = new UNEPOStack();                 
+        ups.prettyPrint(data);
+        
         line;
-        console.log(message);
+        ups.prettyPrint(message);
         line;
         console.log(`Time is:`, new Date(), `.....`);
         line;
