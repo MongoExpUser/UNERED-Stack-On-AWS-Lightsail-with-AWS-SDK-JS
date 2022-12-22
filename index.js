@@ -180,7 +180,7 @@ class UNEPOStack
           { key: "creator", value:  creator },
           { key: "service-provider", value:  serviceProvider },
           { key: "nodejs-version", value:  nodejsVersion  },
-          { key: "postgres-version", value:  postgresVersion }
+          { key: "redis-version", value:  redisVersion }
         ];
         
         //add naming tags with uuid-generared substring suffix for uniqueness
