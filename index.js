@@ -171,7 +171,7 @@ class UNEPOStack
         const serviceProvider = inputConfig.serviceProvider;
         const creator = inputConfig.creator;
         const nodejsVersion = inputConfig.nodejsVersion;
-        const redisVersion = inputConfig.redisVersion;
+        const redisStackVersion = inputConfig.redisStackVersion;
         const staticIpName = inputConfig.staticIpName;
         const tags = [
           { key: "region", value: regionName },
@@ -180,7 +180,7 @@ class UNEPOStack
           { key: "creator", value:  creator },
           { key: "service-provider", value:  serviceProvider },
           { key: "nodejs-version", value:  nodejsVersion  },
-          { key: "redis-version", value:  redisVersion }
+          { key: "redis-stack-version", value:  redisStackVersion }
         ];
         
         //add naming tags with uuid-generared substring suffix for uniqueness
