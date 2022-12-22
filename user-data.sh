@@ -308,36 +308,7 @@ install_redis_stack_server () {
         # 5. clean
         clean_system
 
-        # by default, redis-server auto starts after installation
-        
-        # To START or Re-START or STOP Redis-stack Server or Check Status of Redis-stack Server, use these commands:
-        # sudo systemctl start redis-stack-server
-        # sudo systemctl restart redis-stack-server
-        # sudo systemctl stop redis-stack-server
-        # sudo systemctl status redis-stack-server
-        
-        # To list current active redis units, use this command
-        # sudo systemctl list-units | grep redis
-        
-        # to connect to Redis-stack server via the command line/cli/shell use this command:
-        # sudo redis-cli
-        
-        # FOR PRODUCTION deployment, edit configuration file, to ensure high security, high avalaibility, access control, etc. by:
-        #  a) creating role(s)/user(s) with relevant level of permissions
-        #  b) deploying server with tls/ssl (in-transit), and at-rest (disk/data) encryption
-        #  c) using redis management document as guide:
-        #     - see link to redis documentation on admin, security, config, HA, replication, scaling, persistence, etc: https://redis.io/docs/management/
-        #     - path to configuration file on Ubuntu OS: sudo nano /etc/redis-stack.conf
-        #     - conf file sample: https://raw.githubusercontent.com/redis/redis/7.0/redis.conf
-        #     - can also set indvidual config file entry via redis-cli with : CONFIG SET - see https://redis.io/commands/config-set/
-        #     - list all config file entries via redis cli with : CONFIG GET *   - see https://redis.io/commands/config-get/
-        
-        # ===========================
-        # Recommended Node.js Client
-        # ===========================
-        # Node-redis
-        # Documentation Link: https://github.com/redis/node-redis
-        # Installation: sudo npm install redis
+        # 6. Configuration: See READMEDatabaseConfig.txt file in the repository 
         
       fi
 }
