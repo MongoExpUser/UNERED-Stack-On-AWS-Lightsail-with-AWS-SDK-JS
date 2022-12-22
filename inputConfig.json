@@ -1,1 +1,35 @@
-#
+{
+    "creator" : "info@domain.com",
+    "orgName" : "orgName",
+    "projectName" : "projectName",
+    "environment"  : "dev",
+    "regionName" : "us-east-1",
+    "serviceProvider" : "serviceProvider",
+    "credentials" : "credentials.json",
+    "userData" : "user-data.sh",
+    "nodejsVersion" : "19.0.x",
+    "postgresVersion" : "15.x",
+    "staticIpName" : "staticIpName",
+    "createResources" : true,
+    "deleteResources" : false,
+    "addSuffix" : true,
+    "numberOfInstance": 1,
+    "delayValueMilliSecond": 45000,
+    " // other bundleId" : ["nano_2_0", "micro_2_0", "small_2_0", "medium_2_0", "large_2_0", "xlarge_2_0", "4xlarge_2_0"],
+    " // other avaibilityZone" : ["us-east-1{a,b,c,d,e,f}", "us-east-2{a,b,c}", "us-west-2{a,b,c}", "ca-central-1{a,b}", "etc."],
+    "createParameters" : {
+        "availabilityZone" : "us-east-1a",
+        "instanceNames" : ["instanceName"],
+        "blueprintId" : "ubuntu_20_04",
+        "bundleId" : "micro_2_0",
+        "keyPairName" : "keyPairName",
+        "ipAddressType" : "dualstack"
+    },
+    "deleteInstanceParameters" : {
+        "instanceName" : "instanceName",
+        "forceDeleteAddOns": true
+    },
+    "deleteStaticIpParameters" : {
+        "staticIpName" : "staticIpName"
+    }
+}
