@@ -12,7 +12,7 @@
 #                                                                                                                      #
 #......................................................................................................................#
 #                                                                                                                      #
-#  startup-script.sh (lauch/start-up script) - performs the following actions:                                         #
+#  user-data.sh (lauch/start-up script) - performs the following actions:                                              #
 #  1) Installs additional Ubuntu packages                                                                              #
 #  2) Installs and configures Node.js v19.x and Express v5.0.0-alpha.8 web server framework                            #
 #     Installs other node.js packages                                                                                  #
