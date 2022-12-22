@@ -144,14 +144,12 @@ class UNEPOStack
 
 (function main()
 {
-
     // require/import and instantiate relevant modules
     const fs = require('fs');
     const ups = new UNEPOStack();
     const inputConfigJsonFilePath = "inputConfigEcoLightsail.json";
     let inputConfig = JSON.parse(fs.readFileSync(inputConfigJsonFilePath));
     const numberOfInstance = inputConfig.numberOfInstance;
-
 
     for(let indexValue = 0; indexValue < numberOfInstance; indexValue++)
     {
