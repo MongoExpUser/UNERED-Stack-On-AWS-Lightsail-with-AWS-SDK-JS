@@ -171,7 +171,7 @@ class UNEPOStack
         const serviceProvider = inputConfig.serviceProvider;
         const creator = inputConfig.creator;
         const nodejsVersion = inputConfig.nodejsVersion;
-        const postgresVersion = inputConfig.postgresVersion;
+        const redisVersion = inputConfig.redisVersion;
         const staticIpName = inputConfig.staticIpName;
         const tags = [
           { key: "region", value: regionName },
