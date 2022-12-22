@@ -5,7 +5,7 @@
 #  *                                                                                                                                                   *
 #  * Copyright © 2015 - present. MongoExpUser.  All Rights Reserved.                                                                                   *
 #  *                                                                                                                                                   *
-#  * License: MIT -https://github.com/MongoExpUser/UNEPO-Stack-On-Lightsail-with-AWS-SDK-JS/blob/main/LICENSE                                          *
+#  * License: MIT - https://github.com/MongoExpUser/UNERED-Stack-On-AWS-Lightsail-with-AWS-SDK-JS/blob/main/LICENSE                                    *
 #  *                                                                                                                                                   *
 #  * @License Ends                                                                                                                                     *
 #  *****************************************************************************************************************************************************
