@@ -29,7 +29,7 @@ base_dir="base"
 server_dir="server"
 client_dir="client"
 enable_web_server=true
-enable_postgresql_server=true
+enable_redis_stack_server=true
 
 
 clean_system () {
@@ -291,7 +291,7 @@ install_and_configure_nodejs_web_server () {
     
 install_redis_stack_server () {
 
-      if [ $enable_postgresql_server = true ]
+      if [ $enable_redis_stack_server = true ]
       then
        # install redis-stack-server latest version
         # 1. import the repository signing key:
