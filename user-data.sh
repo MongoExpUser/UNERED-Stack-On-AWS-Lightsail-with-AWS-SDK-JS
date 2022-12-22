@@ -326,8 +326,11 @@ install_redis_stack_server () {
         #  a) creating role(s)/user(s) with relevant level of permissions
         #  b) deploying server with tls/ssl (in-transit), and at-rest (disk/data) encryption
         #  c) using redis management document as guide:
-        #     see link to redis documentation on admin, security, config, HA, replication, scaling, persistence, etc: https://redis.io/docs/management/
-        #     path to configuration file on Ubuntu OS: sudo nano /etc/redis/redis.conf
+        #     - see link to redis documentation on admin, security, config, HA, replication, scaling, persistence, etc: https://redis.io/docs/management/
+        #     - path to configuration file on Ubuntu OS: sudo nano /etc/redis-stack.conf
+        #     - conf file sample: https://raw.githubusercontent.com/redis/redis/7.0/redis.conf
+        #     - can also set indvidual config file entry via redis-cli with : CONFIG SET - see https://redis.io/commands/config-set/
+        #     - list all config file entries via redis cli with : CONFIG GET *   - see https://redis.io/commands/config-get/
         
         # ===========================
         # Recommended Node.js Client
