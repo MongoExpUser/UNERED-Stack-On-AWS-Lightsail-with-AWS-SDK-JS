@@ -200,7 +200,7 @@ install_and_configure_nodejs_web_server () {
           "keywords": [
             "Node.js",
             "Express.js",
-            "PostgreSQL\""
+            "Redis-Stack\""
           ]
         }' > package.json
         # a. all modules (except aws modules)
