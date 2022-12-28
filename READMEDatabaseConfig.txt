@@ -47,6 +47,7 @@ READMEDatabaseConfig.txt
 # FOR PRODUCTION deployment, edit configuration file, to ensure high security, high availability, access control, etc. by:
 #  a) Creating role(s)/user(s) with relevant level of permissions
 #  b) Deploying server with tls/ssl (in-transit), and at-rest (disk/data) encryption
+#  c) Configuring REPLICATION (cluster of one primary and up to 5 replicas) or CLUSTERING (Horz. scaling/sharding of several servers)
 #  c) Using redis management document as guide:
 #     - See link to redis documentation on admin, security, config, HA, replication, scaling, persistence, etc: 
         https://redis.io/docs/management/
