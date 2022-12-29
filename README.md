@@ -7,7 +7,7 @@ Deploys Ubuntu, NodeJS, ExpressJS and Redis-Stack (UNEREDS) Stack on AWS Lightsa
 <br><br>
 The  script deploys/creates or deletes the following specific resources and software:
 
-1) AWS Lightsail instance(s) with Ubuntu 22.04 LTS OS
+1) AWS Lightsail instance(s) with Ubuntu 20.04 LTS OS
                                                                                                                                                  
 2) Bash launch or start-up script (user data) for the installation of software, on the instance(s), including:
 
