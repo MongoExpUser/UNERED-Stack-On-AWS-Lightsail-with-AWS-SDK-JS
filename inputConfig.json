@@ -46,8 +46,8 @@
             "toPort" : 6379
         }
     ],
-    " // other bundleId" : ["nano_2_0", "micro_2_0", "small_2_0", "medium_2_0", "large_2_0", "xlarge_2_0", "4xlarge_2_0"],
-    " // other avaibilityZone" : ["us-east-1{a,b,c,d,e,f}", "us-east-2{a,b,c}", "us-west-2{a,b,c}", "ca-central-1{a,b}", "etc."],
+    " // all bundleId" : ["nano_2_0", "micro_2_0", "small_2_0", "medium_2_0", "large_2_0", "xlarge_2_0", "4xlarge_2_0"],
+    " // all avaibilityZone" : ["us-east-1{a,b,c,d,e,f}", "us-east-2{a,b,c}", "us-west-2{a,b,c}", "ca-central-1{a,b}", "etc."],
     "createParameters" : {
         "availabilityZone" : "us-east-1a",
         "instanceNames" : ["instanceName"],
