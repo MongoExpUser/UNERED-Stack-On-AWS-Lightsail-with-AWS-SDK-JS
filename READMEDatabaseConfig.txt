@@ -1,5 +1,4 @@
-
-READMEDatabaseConfig.txt
+# READMEDatabaseConfig.txt
 
 ================================
 # README Database Configuration
@@ -19,10 +18,12 @@ READMEDatabaseConfig.txt
 
 
 # To connect to Redis-stack server via the command line/shell, use any of these commands:
-# sudo redis-cli
+# sudo redis-cli 
 # sudo redis-cli -h host -p port 
 # -- with tls configured, see next line
 # sudo redis-cli -h host -p port --tls --cert /etc/ssl/certs/server.crt --key /etc/ssl/certs/server.key --cacert /etc/ssl/certs/root.crt 
+# -- with raw output, see next line
+# sudo redis-cli --raw -h host -p port --tls --cert /etc/ssl/certs/server.crt --key /etc/ssl/certs/server.key --cacert /etc/ssl/certs/root.crt 
 
 
 # Then authenticate with the following command, if the server is configured for authentication (i.e. requirepass is  enabled)
@@ -66,3 +67,4 @@ READMEDatabaseConfig.txt
 # Node-redis
 # Documentation Link: https://github.com/redis/node-redis
 # Installation: sudo npm install redis
+
