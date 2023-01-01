@@ -22,9 +22,10 @@ The  script deploys/creates or deletes the following specific resources and soft
 
 ### To deploy the stack  on ```AWS```, follow these steps:
 
-1) #### Install NodeJS
-    curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - <br>
-    sudo apt-get install -y nodejs
+1) #### Install NodeJS and aws-sdk (v2) module
+    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - <br>
+    sudo apt-get install -y nodejs <br>
+    sudo npm install aws-sdk
     
 2) #### Download or clone the following files, from this repo, into the current working directory (CWD): <br>
    NodeJS script - index.js <br>
