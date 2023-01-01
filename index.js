@@ -16,7 +16,7 @@
 #  *                                                                                                                                                   *
 #  *  2) Bash launch/start-up script (user data) for the installation of software, on the instance(s), including:                                      *
 #  *     Additional Ubuntu OS packages; NodeJS; ExpressJS web server framework; other Node.js packages; and PostgreSQL.                                *
-#  *                                                                                                                                                   *                                                                                                                                                  *
+#  *                                                                                                                                                   * 
 #  *****************************************************************************************************************************************************
 */
 
