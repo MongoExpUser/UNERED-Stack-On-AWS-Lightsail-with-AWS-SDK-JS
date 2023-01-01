@@ -1,35 +1,32 @@
 #!/bin/bash
 
-#======================================================================================================================#
-#                                                                                                                      #
-#  @License Starts                                                                                                     #
-#                                                                                                                      #
-#  Copyright © 2015 - present. MongoExpUser.  All Rights Reserved.                                                     #
-#                                                                                                                      #
-#  License: MIT - https://github.com/MongoExpUser/UNERED-Stack-On-AWS-Lightsail-with-AWS-SDK-JS/blob/main/LICENSE.     #
-#                                                                                                                      #
-#  @License Ends                                                                                                       #
-#                                                                                                                      #
-#......................................................................................................................#
-#                                                                                                                      #
-#  user-data.sh (lauch/start-up script) - performs the following actions:                                              #
-#  1) Installs additional Ubuntu packages                                                                              #
-#  2) Installs and configures Node.js v19.x and Express v5.0.0-alpha.8 web server framework                            #
-#     Installs other node.js packages                                                                                  #
-#  3) Installs redis-stack server                                                                                      #
-#                                                                                                                      #
-#======================================================================================================================#
+#===================================================================================================================#
+#                                                                                                                   #
+#  @License Starts                                                                                                  #
+#                                                                                                                   #
+#  Copyright © 2015 - present. MongoExpUser.  All Rights Reserved.                                                  #
+#                                                                                                                   #
+#  License: MIT                                                                                                     #
+#                                                                                                                   #
+#  @License Ends                                                                                                    #
+#                                                                                                                   #
+#...................................................................................................................#
+#                                                                                                                   #
+#  user-data.sh (lauch/start-up script)                                                                             #
+#===================================================================================================================#
 
 
+# set permission on main directories
 sudo chmod 775 /home
 sudo chmod 775 /home/ubuntu
-      
+
 # define common variable(s)
 base_dir="base"
 server_dir="server"
 client_dir="client"
 enable_web_server=true
 enable_redis_stack_server=true
+redis_data_dir="/var/lib/redis-stack/data"
 
 
 clean_system () {
@@ -50,121 +47,58 @@ clean_system () {
 
 
 create_dir_and_install_missing_packages () {
-      # create relevant directories
+      # create directories
       cd /home/
       sudo mkdir $base_dir
       cd $base_dir
       sudo mkdir $server_dir
       sudo mkdir $client_dir
-          
-          
-      # install additional packages (in case not available in the base image)
+
+      # update system
+      sudo apt-get -y update
+
+      # install additional packages
+      sudo apt-get -y install nfs-common
       sudo apt-get -y install sshpass
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install cmdtest
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install spamassassin
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install snap
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install nmap
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install net-tools
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install aptitude
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install build-essential
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install certbot
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install python3-certbot-apache
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install systemd
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install procps
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install nano
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install apt-utils
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install wget
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install curl
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install gcc
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install gnupg
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install gnupg2
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install make
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install sshpass
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install cmdtest
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install snapd
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install screen
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install spamc
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install parted
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install iputils-ping
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install unzip
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y install gzip
-      echo -e "Y"
-      echo -e "Y"
+      sudo apt-get -y openssl
+      sudo apt-get -y tcl-tls
+      sudo apt-get -y make
       sudo apt-get -y install xfsprogs
-      echo -e "Y"
-      echo -e "Y"
       sudo modprobe -v xfs
-     
-      # aws cli (version 2)
       sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      echo -e "Y"
       echo -e "Y"
       sudo chmod 777 awscliv2.zip
       sudo unzip awscliv2.zip
-      echo -e "Y"
-      echo -e "Y"
       sudo ./aws/install
-      
-      #  python 3.x
       sudo apt-get -y install python3
-      echo -e "Y"
-      echo -e "Y"
 
       # clean
       clean_system
@@ -175,15 +109,15 @@ install_and_configure_nodejs_web_server () {
       cd /home/
       cd $base_dir
       
-      if [ $enable_web_server = true ]
-      then
+      if [ $enable_web_server = true ]; then
+        
         # install node.js - version 19
         curl -sL https://deb.nodesource.com/setup_19.x | sudo -E bash -
         echo -e "\n"
         sudo apt-get install -y nodejs
         echo -e "\n"
             
-        # create node.js' package.json file
+        # create package.json file
         sudo echo ' {
           "name": "Nodejs-Expressjs",
           "version": "1.0",
@@ -203,7 +137,7 @@ install_and_configure_nodejs_web_server () {
             "Redis-Stack\""
           ]
         }' > package.json
-        # a. all modules (except aws modules)
+        # a. basic modules 
         sudo npm install express@5.0.0-alpha.8
         sudo npm install -g npm
         sudo npm install bcryptjs
@@ -240,7 +174,7 @@ install_and_configure_nodejs_web_server () {
         sudo npm install mongodb
         sudo npm install namesilo-domain-api
         sudo npm install xml2js
-        # b. other db drivers
+        # b.  db modules/drivers
         sudo npm install gremlin
         sudo npm install mongodb
         sudo npm install mysql 
@@ -288,19 +222,41 @@ install_and_configure_nodejs_web_server () {
       clean_system
 }
 
-    
-install_redis_stack_server () {
 
-      if [ $enable_redis_stack_server = true ]
-      then
-       # install redis-stack-server latest version
+create_swap_and_edit_for_permanence()
+{
+      # create swap & make permanent at reboot
+      sudo dd if=/dev/zero of=/swapfile count=2048 bs=1M
+      sudo ls / | grep swapfile
+      sudo chmod 600 /swapfile
+      sudo ls -lh /swapfile
+      sudo mkswap /swapfile
+      sudo swapon /swapfile
+      sudo free -m
+      sudo scp /etc/fstab /etc/fstab.bak 
+      echo '/swapfile none swap sw 0 0' >> /etc/fstab
+      # set swapiness level & make permanent at reboot
+      sudo scp /etc/sysctl.conf /etc/sysctl.conf.bak
+      echo 'vm.swappiness=10' >> /etc/sysctl.conf
+}
+
+
+install_redis_stack_server () {
+      cd /home/
+
+      if [ $enable_redis_stack_server = true ]; then
+        # install redis-stack-server latest version
+
         # 1. import the repository signing key:
         curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+        
         # 2. create the file repository configuration:
         echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+        
         # 3. update the package lists:
         sudo apt-get -y update
-        # 4.  finally, install
+
+        # 4.  install
         sudo apt-get -y install redis-stack-server
         echo -e "Y"
         echo -e "Y"
@@ -308,19 +264,115 @@ install_redis_stack_server () {
         # 5. clean
         clean_system
 
-        # 6. Configuration: See READMEDatabaseConfig.txt file in the repository 
+        # 6. stop server
+        sudo systemctl stop redis-stack-server
+
+        # 7. create custom redis data dir and set permission on relevant dirs: data, run and log
+        sudo chmod 777 /var/lib/redis-stack
+        sudo mkdir $redis_data_dir
+        sudo chmod 777 $redis_data_dir
+        sudo chmod 777 /var/run
+        sudo chmod 777 /var/log
         
+        # 8. backup config file & create a custom config file: see READMEDatabaseConfig.txt in the repo for guide
+        sudo scp /etc/redis-stack.conf /etc/redis-stack.bak
+
+echo '# /etc/redis-stack.conf file 
+# redis-stack.conf file
+# customized by editing the settings below: remove, add or change settings as deem necessary
+
+# NETWORK               
+bind * -::*     
+port 6379
+
+# TLS/SSL
+port 0
+tls-port 6379
+tls-ca-cert-file /etc/ssl/certs/root.crt
+tls-cert-file /etc/ssl/certs/server.crt
+tls-key-file /etc/ssl/certs/server.key
+tls-client-cert-file /etc/ssl/certs/client.crt
+tls-client-key-file /etc/ssl/certs/client.key
+tls-auth-clients yes
+tls-replication yes
+tls-protocols "TLSv1.2 TLSv1.3"
+
+# MODULES
+loadmodule /opt/redis-stack/lib/redisearch.so
+loadmodule /opt/redis-stack/lib/redisgraph.so
+loadmodule /opt/redis-stack/lib/redistimeseries.so RETENTION_POLICY 0 OSS_GLOBAL_PASSWORD pasd
+loadmodule /opt/redis-stack/lib/rejson.so
+loadmodule /opt/redis-stack/lib/redisbloom.so
+
+# GENERAL
+daemonize no
+databases 20
+always-show-logo yes
+pidfile /var/run/redis.pid
+logfile /var/log/edis.log
+
+
+# SNAPSHOTTING
+stop-writes-on-bgsave-error no
+# dir value below is the dir created in the start-up script
+dir /var/lib/redis-stack/data  
+dbfilename dump.rdb
+
+# REPLICATION - set only on replica
+# - set up on replica instance(s), if replication is desired
+# replicaof <masterip> <masterport>
+# masterauth <master-password>
+# masteruser <username>
+
+# SECURITY
+requirepass <master-password>
+
+# APPEND ONLY MODE
+appendonly yes              
+appendfsync always   
+appendfilename appendonly.aof
+appenddirname appendonlydir  
+
+# REDIS CLUSTER - set up only for sharding (horizontal scaling)
+# See: https://redis.io/docs/management/scaling/ for all settings
+# cluster-enabled yes
+# cluster-replica-validity-factor 0 
+
+' > /etc/redis-stack.conf
+
+sudo chmod 777 /etc/redis-stack.conf
+      # 8. generate self-signed tls certs (server & client) for testing tls 
+      # server
+      sudo openssl genrsa -out /etc/ssl/certs/root.key 2048
+      sudo openssl req -x509 -new -nodes -key /etc/ssl/certs/root.key -days 7300 -out /etc/ssl/certs/root.crt -subj '/CN=CAlocalhost'
+      sudo openssl genrsa -out /etc/ssl/certs/server.key  2048 
+      sudo openssl req -new -key /etc/ssl/certs/server.key -out /etc/ssl/certs/server.csr -subj '/CN=localhost'
+      sudo openssl x509 -req -days 7300 -in /etc/ssl/certs/server.csr -CA /etc/ssl/certs/root.crt  -CAkey /etc/ssl/certs/root.key -set_serial 01 -out /etc/ssl/certs/server.crt 
+      # client
+      sudo scp /etc/ssl/certs/server.key /etc/ssl/certs/client.key
+      sudo scp /etc/ssl/certs/server.crt /etc/ssl/certs/client.crt
+      # set permission
+      sudo chmod 775 /etc/ssl/certs/server.crt
+      sudo chmod 775 /etc/ssl/certs/server.key
+      sudo chmod 775 /etc/ssl/certs/root.crt
+      sudo chmod 775 /etc/ssl/certs/client.crt
+      sudo chmod 775 /etc/ssl/certs/client.key
+      
+      # 9. enable service and start, stop and restart server to enable all config settings
+      sudo systemctl enable redis-stack-server.service
+      sudo systemctl start redis-stack-server
+      sudo systemctl stop redis-stack-server
+      sudo systemctl start redis-stack-server
+
       fi
 }
 
 
 main () {
-      # execute all functions sequentially
       create_dir_and_install_missing_packages
       install_and_configure_nodejs_web_server
+      create_swap_and_edit_for_permanence
       install_redis_stack_server
 }
 
-
-# invoke main
 main
