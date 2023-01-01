@@ -300,7 +300,7 @@ tls-protocols "TLSv1.2 TLSv1.3"
 # MODULES
 loadmodule /opt/redis-stack/lib/redisearch.so
 loadmodule /opt/redis-stack/lib/redisgraph.so
-loadmodule /opt/redis-stack/lib/redistimeseries.so RETENTION_POLICY 0 OSS_GLOBAL_PASSWORD pasd
+loadmodule /opt/redis-stack/lib/redistimeseries.so RETENTION_POLICY 0 OSS_GLOBAL_PASSWORD <master-password>
 loadmodule /opt/redis-stack/lib/rejson.so
 loadmodule /opt/redis-stack/lib/redisbloom.so
 
