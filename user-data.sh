@@ -111,7 +111,7 @@ install_and_configure_nodejs_web_server () {
       
       if [ $enable_web_server = true ]; then
         
-        # install node.js - version 19
+        # install node.js v19.x
         curl -sL https://deb.nodesource.com/setup_19.x | sudo -E bash -
         echo -e "\n"
         sudo apt-get install -y nodejs
@@ -182,9 +182,9 @@ install_and_configure_nodejs_web_server () {
         sudo npm install neo4j-driver
         sudo npm install redis
         sudo npm install sqlite3
-        # c. all modules of aws sdk for javaScript/node.sj v2
+        # c. aws-sdk v2
         sudo npm install aws-sdk
-        # d. selected modules of aws sdk for javascript/node.sj v3
+        # d. selected modules of aws-sdk v3
         sudo npm install @aws-sdk/client-apigatewayv2
         sudo npm install @aws-sdk/client-comprehend
         sudo npm install @aws-sdk/client-comprehendmedical
