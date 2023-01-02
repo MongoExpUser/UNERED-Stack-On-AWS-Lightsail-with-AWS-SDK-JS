@@ -341,7 +341,7 @@ appenddirname appendonlydir
 ' > /etc/redis-stack.conf
 
 sudo chmod 777 /etc/redis-stack.conf
-      # 8. generate self-signed tls certs (server & client) for testing tls 
+      # 8. generate self-signed tls certs (server & client) for testing & for private (non-public) network usage
       # server
       sudo openssl genrsa -out /etc/ssl/certs/root.key 2048
       sudo openssl req -x509 -new -nodes -key /etc/ssl/certs/root.key -days 7300 -out /etc/ssl/certs/root.crt -subj '/CN=CAlocalhost'
