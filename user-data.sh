@@ -159,7 +159,6 @@ install_and_configure_nodejs_web_server () {
         sudo npm install mime
         sudo npm install mkdirp
         sudo npm install ocsp
-        sudo npm install pg
         sudo npm install python-shell
         sudo npm install s3-proxy
         sudo npm install s3-node-client
@@ -180,6 +179,7 @@ install_and_configure_nodejs_web_server () {
         sudo npm install mysql 
         sudo npm install @mysql/xdevapi
         sudo npm install neo4j-driver
+        sudo npm install pg
         sudo npm install redis
         sudo npm install sqlite3
         # c. aws-sdk v2
