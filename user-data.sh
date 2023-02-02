@@ -33,15 +33,9 @@ clean_system () {
       sudo chmod 775 /var/lib/apt/lists/
       sudo rm -rf /var/lib/apt/lists/*
       echo -e "Y"
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y autoclean
       echo -e "Y"
-      echo -e "Y"
-      echo -e "Y"
       sudo apt-get -y autoremove
-      echo -e "Y"
-      echo -e "Y"
       echo -e "Y"
 }
 
