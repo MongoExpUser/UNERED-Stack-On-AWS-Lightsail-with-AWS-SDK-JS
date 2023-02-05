@@ -271,7 +271,7 @@ install_redis_stack_server () {
         sudo chmod 777 /var/log
         
         # 8. backup config file & create a custom config file: see READMEDatabaseConfig.txt in the repo for guide
-        sudo scp /etc/redis-stack.conf /etc/redis-stack.bak
+        sudo scp /etc/redis-stack.conf /etc/redis-stack.conf.bak
 
 echo '# /etc/redis-stack.conf file 
 # redis-stack.conf file
