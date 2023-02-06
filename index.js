@@ -194,7 +194,7 @@ class UNEPOStack
         const environment  = inputConfig.environment;
         const regionName = inputConfig.regionName;
         const preOrPostFix = `${orgName}-${environment}`;
-        const resoureName = inputConfig.resoureName;
+        const resourceName = inputConfig.createParameters.instanceNames[0];
         const serviceProvider = inputConfig.serviceProvider;
         const creator = inputConfig.creator;
         const nodejsVersion = inputConfig.nodejsVersion;
@@ -213,11 +213,11 @@ class UNEPOStack
         //add naming tags with uuid-generared substring suffix for uniqueness
         if(addSuffix === true)
         {
-          tags.push( { key: "name", value: `${preOrPostFix}-${resoureName}-${suffix}` } );
+          tags.push( { key: "name", value: `${preOrPostFix}-${resourceName}-${suffix}` } );
         }
         else if(addSuffix === false)
         {
-          tags.push( { key: "name", value: `${preOrPostFix}-${resoureName}` } );
+          tags.push( { key: "name", value: `${preOrPostFix}-${resourceName}` } );
         }
         
         //define parameters
