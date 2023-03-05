@@ -169,6 +169,7 @@ install_and_configure_nodejs_web_server () {
         sudo npm install mongodb
         sudo npm install namesilo-domain-api
         sudo npm install xml2js
+        sudo npm install zeromq@5
         # b.  db modules/drivers
         sudo npm install gremlin
         sudo npm install mongodb
